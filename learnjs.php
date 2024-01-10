@@ -15,8 +15,8 @@
         <script src="js/edit.js"></script> -->
 
         <script>
-            // url = "localhost/data.php?test";
-            url = "https://api.weather.gov/gridpoints/OKX/35,35/forecast";
+            url = "data.php?test";
+            // url = "https://api.weather.gov/gridpoints/OKX/35,35/forecast";
 
             function getPromise () {
                 return new Promise (function (resolve, reject) {
@@ -27,42 +27,30 @@
                 });
             }
 
-            async function fetchData () {
-                r = await fetch (url);
-                // r = await fetch (
-                //     url, {
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'Accept': 'application/json'
-                //     }
-                // });
-                data = await r.json();
-                console.log (data);
-            };
-
             //  call getPromise async/await
             async function callGP () {
                 r = await getPromise ()
                 console.log ("getPromise async : " + r)
             };
 
+            async function fetchData () {
+                r = await fetch (url);
+                data = await r.json();
+                console.log (data);
+            };
+
             function main () {
                 document.write ("yeah");
 
-                //  getPromise
+                //  1. getPromise
                 promise = getPromise ();
                 promise.then (
-                    function (data) {                       //  resolve
-                        console.log (data);
-                    },
-                    function (data) {                       //  reject
-                        console.log ("Error " + data);
-                    }
+                    function (data) {console.log ("Resolve: " + data);},        //  resolve
+                    function (data) {console.log ("Reject: " + data);}          //  reject
                 );
 
-                //  async getPromise
-                callGP ();
-                fetchData ();
+                callGP ();          //  2. async getPromise
+                fetchData ();       //  3. async fetch
             };
 
             window.onload = main;
@@ -70,8 +58,5 @@
     </head>
 
     <body>
-        <?php
-
-        ?>
     </body>
 </html>
