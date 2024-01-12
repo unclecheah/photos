@@ -1,82 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Material Design for Bootstrap</title>
-    <!-- MDB icon -->
-    <link rel="icon" href="mdb/img/mdb-favicon.ico" type="mdb/image/x-icon" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
-    <!-- MDB -->
-    <link rel="stylesheet" href="mdb/css/mdb.min.css" />
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Material Design for Bootstrap</title>
+        <link rel="icon" href="mdb/img/mdb-favicon.ico" type="mdb/image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+        <link rel="stylesheet" href="mdb/css/mdb.min.css" />
+    </head>
+    <body>
     <!-- Start your project here-->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
+        <header class="mb-7">
+            <!-- navbar -->
+            <nav style="z-index: 1; min-height: 58.9px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                        <i class="fas fa-gem text-secondary"></i>
-                        <!-- <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="15" alt="MDB Logo" loading="lazy" /> -->
-                    </a>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
-                    </ul>
-                </div>
-
-                <div class="d-flex align-items-center">
-                    <a class="text-reset me-3" href="#"><i class="fas fa-shopping-cart"></i></a>
-                    <div class="dropdown">
-                        <a data-mdb-dropdown-init class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" aria-expanded="false">
-                            <i class="fas fa-bell"></i>
-                            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                            <i class="fas fa-gem text-secondary"></i>
+                            <!-- <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="15" alt="MDB Logo" loading="lazy" /> -->
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Some news</a></li>
-                            <li><a class="dropdown-item" href="#">Another news</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link text-secondary fw-bold" href="#">About</a></li>
+                            <li class="nav-item"><a class="nav-link text-secondary fw-bold" href="#">Projects</a></li>
+                            <li class="nav-item"><a class="nav-link text-secondary fw-bold" href="#">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="dropdown">
-                        <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy" />
+
+                    <div class="d-flex align-items-center">
+                        <a class="text-secondary me-3" href="https://www.youtube.com/c/Mdbootstrap/videos" rel="nofollow" target="_blank">
+                            <i class="fab fa-youtube"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                            <li><a class="dropdown-item" href="#">My profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
+                        <a class="text-secondary me-3" href="https://twitter.com/ascensus_mdb" rel="nofollow" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-secondary me-3" href="https://github.com/mdbootstrap/mdb-ui-kit" rel="nofollow" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- background -->
+            <div class="bg-image vh-100" style="margin-top: -58.9px; background-image: url('mdb/img/018.jpg');">
+                <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">
+                    <div class="container d-flex justify-content-center align-items-center h-100">
+                        <div class="text-white text-center">
+                            <h1 class="mb-3">Whoah, what a view!</h1>
+                            <h5 class="mb-4">Learning web design is such an amazing thing</h5>
+                            <a class="btn btn-secondary btn-lg m-2" href="#" role="button">Learn with me<i class="fas fa-graduation-cap ms-2"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
-    </header>
+        </header>
 
-    <main>
-        <div class="container">
+        <main>
+            <div class="container">
+                <section class="mb-10">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel" data-mdb-carousel-init>
+                                <div class="carousel-indicators">
+                                    <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+                                </div>
 
-        </div>
-    </main>
+                                <div class="carousel-inner rounded-6 shadow-4-strong">
+                                    <div class="carousel-item active">
+                                        <img src="mdb/img/img15.webp" class="d-block w-100" alt="Sunset Over the City"/>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>First slide label</h5>
+                                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                        </div>
+                                    </div>
 
-    <footer>
+                                    <div class="carousel-item">
+                                        <img src="mdb/img/img22.webp" class="d-block w-100" alt="Canyon at Nigh"/>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Second slide label</h5>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
 
-    </footer>
-    <!-- End your project here-->
+                                    <div class="carousel-item">
+                                        <img src="mdb/img/img23.webp" class="d-block w-100" alt="Cliff Above a Stormy Sea"/>
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Third slide label</h5>
+                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                        </div>
+                                    </div>
+                                </div>
 
-    <!-- MDB -->
-    <script type="text/javascript" src="mdb/js/mdb.umd.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-  </body>
+                                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <h3 class="fw-bold mb-4">Details</h3>
+                            <p>This beginner-friendly, example-based course will guide you through the essential knowledge of MDB ecosystem.</p>
+                            <p class="mb-2"><strong>What will you learn:</strong></p>
+
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>Bootstrap</li>
+                                <li><i class="fas fa-check text-success me-2"></i>MDBootstrap</li>
+                                <li><i class="fas fa-check text-success me-2"></i>UI & UX design</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Responsive web design</li>
+                            </ul>
+
+                            <a class="btn btn-link btn-rounded" href="#" role="button" data-mdb-ripple-color="primary">Learn more</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+
+        </footer>
+        <!-- End your project here-->
+
+        <script type="text/javascript" src="mdb/js/mdb.umd.min.js"></script>
+        <script type="text/javascript"></script>
+    </body>
 </html>
