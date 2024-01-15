@@ -1,92 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html data-bs-theme = "dark">
     <head>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <link rel="stylesheet" href="mdb/css/mdb.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script> -->
         <!-- <script type="module" src="lightbox.js"></script> -->
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"> -->
+        <title>Photos</title>
     </head>
+
+
+    <!-- <body class="d-flex flex-column h-100"> -->
+    <?php include 'photos.php'; ?>
     <body>
-        <div class="row">
-            <a href="data/bali/Bali-20231223-101746-ATV.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="data/bali/Bali-20231223-101746-ATV.jpg" class="img-fluid">
-            </a>
+        <!-- <div class="container-fluid" style="height: 500px;"> -->
+            <header class="mb-5 mb-lg-7">
+                <?php
+                    navgn ();
+                    bg ();
+                ?>
+            </header>
+            <main>
+            <?php
+                // include 'photos.php';
+                $photoDir = 'data';
+                $folders = array ();
+                $files = array ();
 
-            <a href="data/bali/Bali-20231223-102038-ATV.mp4" class="col-sm-4">
-                <img src="data/bali/Bali-20231223-101746-ATV.jpg" class="img-fluid">
-            </a>
+                echo "<h3 class='fw-bold text-center mt-3 mb-3'>" . $photoDir . "</h3>";
 
-            <a href="https://unsplash.it/1200/768.jpg?image=253" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=253" class="img-fluid">
-            </a>
-        </div>
-        <div class="row">
-            <a href="https://unsplash.it/1200/768.jpg?image=254" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=254" class="img-fluid">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=255" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=255" class="img-fluid">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=256" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=256" class="img-fluid">
-            </a>
-        </div>
+                getContents ($photoDir);
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script id="bs5-lightbox"></script>
-        <script>
-            var lightboxScript = document.getElementById('bs5-lightbox');
-            var src = 'https://cdn.jsdelivr.net/npm/bs5-lightbox@latest/dist/index.bundle.min.js'
-            var searchParams = new URLSearchParams(window.location.search);
-            if (searchParams.has('local')) {
-                src = "../dist/index.js";
-            } else if (searchParams.has('github')) {
-                src = 'https://cdn.jsdelivr.net/gh/trvswgnr/bs5-lightbox@main/dist/index.bundle.min.js';
-            }
-            lightboxScript.src = src;
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.2.0/markdown-it.min.js" integrity="sha512-cTQeM/op796Fp1ZUxfech8gSMLT/HvrXMkRGdGZGQnbwuq/obG0UtcL04eByVa99qJik7WlnlQOr5/Fw5B36aw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-        <script>
-            "use strict";
-                var md = window.markdownit();
-                var codeBlocks = document.querySelectorAll('[data-code]');
-                codeBlocks.forEach(function (el) {
-                    var target = document.getElementById(el.dataset.code);
-                    if (target) {
-                        var html = el.innerHTML.replace(/^\s*\n/gm, '').split('\n');
-                        var tabsToTrim = 0;
-                        html = html.map(function (v, i) {
-                            if (i === 0) {
-                                var matches = v.match(/^[\t\s]+/);
-                                tabsToTrim = matches && matches[0].length ? matches[0].split('\t').length - 1 : 0;
-                            }
-                            var regex = new RegExp('^[\\t\\s]{0,' + tabsToTrim + '}');
-                            return v.replace(regex, '');
-                        }).join('\n').trim();
-                        target.innerHTML = '```html\n' + html + '\n```';
-                    }
-                });
-                var markdownEls = document.querySelectorAll('.markdown');
-                markdownEls.forEach(function (el) {
-                    el.innerHTML = md.render(el.innerHTML);
-                });
-                hljs.highlightAll();
+                foreach ($folders as $i) echo $i . " ";
+                echo "<br />";
+                foreach ($files as $i) echo $i . " ";
+                echo "<br />";
 
-                document.querySelectorAll('.language-js').forEach(function(el) {
-                    el.innerHTML = md.utils.unescapeAll(el.innerHTML);
-                });
+                card ();
+            ?>
+            </main>
 
-                var mainNavItems = document.querySelectorAll('#main-nav .list-group-item');
-                var mainNavItemsAnchor = document.querySelectorAll('#main-nav .list-group-item a');
-                mainNavItemsAnchor.forEach(function(el) {
-                    el.addEventListener('click', function(e) {
-                        mainNavItems.forEach(function(v) {
-                            v.classList.remove('active');
-                        });
-                        el.closest('li').classList.add('active');
-                    });
-                });
-        </script>
-
+            <?php footer (); ?>
+        <!-- </div> -->
+        <script type="text/javascript" src="mdb/js/mdb.umd.min.js"></script>
     </body>
 </html>
