@@ -1,8 +1,4 @@
 <?php
-    $folders;
-    $files;
-
-
     function navgn () {
         echo <<<EOD
         <nav style="z-index: 1; min-height: 58.9px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -68,20 +64,75 @@
     };
 
 
-    function card () {
-        $output = " <div class='card'>"
-                . "     <div class='bg-image'>"
-                . "         <img src='fs2.webp' class='img-fluid' />"
-                . "         <a href='#!'>"
-                . "         </a>"
-                . "     </div>"
-                . "     <div class='card-body'>"
-                . "         <h5 class='card-title'>Card title</h5>"
-                . "         <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>"
+    function firstImg ($dir) {
+        $files = scandir ($dir);
+        return $dir . "/" . $files[2];
+    };
+
+
+    function card ($i, $img) {
+        $output = " <div class='col-lg-2 col-md-4 col-sm-6 mb-4'>"
+                . "     <div class='card h-100'>"
+                . "         <div class='bg-image' style='height: 150px;'>"
+                . "             <a href='#!'>"
+                . "                 <img src='${img}' class='img-fluid'/>"
+                . "             </a>"
+                . "         </div>"
+                . "         <div class='card-body'>"
+                . "             <h5 class='card-title'>${i}</h5>"
+                // . "             <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>"
+                . "         </div>"
                 . "     </div>"
                 . " </div>";
 
         echo $output;
+    };
+
+
+    function processVideo () {
+        global $maxHeight;
+        echo "<img class='mb-1 me-1' src='fs2.webp' height='${maxHeight}' />";
+    };
+
+
+    function processImage ($file) {
+        global $maxHeight;
+
+        $originalImage = imagecreatefromjpeg($file);
+        $originalWidth = imagesx($originalImage);
+        $originalHeight = imagesy($originalImage);
+        $aspectRatio = $originalWidth / $originalHeight;
+        $scaleFactor = $maxHeight / $originalHeight;
+        $newHeight = $maxHeight;
+        $newWidth = $scaleFactor * $originalWidth;
+
+        $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($resizedImage, $originalImage, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
+
+        /////   to save image   /////
+        // $out = imagecreatetruecolor ($newWidth, $newHeight);
+        // imagejpeg ($resizedImage, $imagePath . "-1.jpg", 100);
+        /////////////////////////////
+
+        ob_start ();
+        imageinterlace($resizedImage, true); // Enable progressive rendering
+        imagejpeg($resizedImage, null, 85); // Adjust quality as needed
+        $raw = ob_get_clean ();
+        // ob_end_flush ();
+        echo "<img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' />";
+        imagedestroy($originalImage);
+        imagedestroy($resizedImage);
+    };
+
+
+    function thumbnail ($infile) {
+        $mime = mime_content_type ($infile);
+        if (strstr ($mime, "video/")) {
+            processVideo ();
+            // processImage ("fs2.webp");
+        } else {
+            processImage ($infile);
+        }
     };
 
 
@@ -92,8 +143,8 @@
         $items = scandir($dir, 0);
         for ($i = 0; $i < count($items); $i++) {
             if ($items[$i] == "." || $items[$i] == "..") continue;
-            if (is_dir ($dir . "/" . $items[$i])) array_push ($folders, $items[$i]);
-            else array_push ($files, $items[$i]);
+            if (is_dir ($dir . "/" . $items[$i])) array_push ($folders, $dir . "/" . $items[$i]);
+            else array_push ($files, $dir . "/" . $items[$i]);
         }
     };
 ?>

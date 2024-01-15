@@ -19,35 +19,58 @@
     <!-- <body class="d-flex flex-column h-100"> -->
     <?php include 'photos.php'; ?>
     <body>
-        <!-- <div class="container-fluid" style="height: 500px;"> -->
-            <header class="mb-5 mb-lg-7">
-                <?php
-                    navgn ();
-                    bg ();
-                ?>
-            </header>
-            <main>
+        <header class="mb-5 mb-lg-7">
             <?php
-                // include 'photos.php';
-                $photoDir = 'data';
-                $folders = array ();
-                $files = array ();
-
-                echo "<h3 class='fw-bold text-center mt-3 mb-3'>" . $photoDir . "</h3>";
-
-                getContents ($photoDir);
-
-                foreach ($folders as $i) echo $i . " ";
-                echo "<br />";
-                foreach ($files as $i) echo $i . " ";
-                echo "<br />";
-
-                card ();
+                navgn ();
+                bg ();
             ?>
-            </main>
+        </header>
 
-            <?php footer (); ?>
-        <!-- </div> -->
+        <main>
+            <div class="container-fluid">
+                <?php
+                    // include 'photos.php';
+                    $photoDir = 'data/bali';
+                    $maxHeight = 150;               //  max height of thumbnail
+                    $folders = array ();
+                    $files = array ();
+
+                    getContents ($photoDir);
+
+
+                    // foreach ($folders as $i) echo $i . " ";
+                    // echo "<br />";
+                    // foreach ($files as $i) echo $i . " ";
+                    // echo "<br />";
+                    echo "<h3 class='fw-bold text-center mt-3 mb-3'>" . $photoDir . "</h3>";
+
+                    //  folders
+                    echo "<section class='mb-5 mb-lg-10'>";
+                    echo "  <div class='row gx-lx-5'>";
+                        foreach ($folders as $i) {
+                            card (basename($i), firstImg($i));
+                        };
+                    echo "  </div>";
+                    echo "</section>";
+
+                    //  files
+                    echo "<section>";
+                    echo "  <div>";
+                        // card ("fs2.webp");
+                        // card ("data/Bali-20231218-175142.jpg");
+                        // card ("data/Bali-20231218-175154.jpg");
+                        // card ("data/Bali-20231218-175304.jpg");
+                        foreach ($files as $i) {
+                            thumbnail ($i);
+                        };
+                    echo "  </div>";
+                    echo "</section>";
+                ?>
+
+            </div>
+        </main>
+
+        <?php footer (); ?>
         <script type="text/javascript" src="mdb/js/mdb.umd.min.js"></script>
     </body>
 </html>
