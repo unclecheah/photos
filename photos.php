@@ -89,9 +89,12 @@
     };
 
 
-    function processVideo () {
+    function processVideo ($file) {
         global $maxHeight;
-        echo "<img class='mb-1 me-1' src='fs2.webp' height='${maxHeight}' />";
+        // echo "<img class='mb-1 me-1' src='fs2.webp' height='${maxHeight}' />";
+        echo "  <a href='${file}' data-pswp-type='video' target='_blank'>"
+            . "     <img class='mb-1 me-1' src='fs2.jpg' height='${maxHeight}' alt='' />"
+            . " </a>";
     };
 
 
@@ -119,7 +122,10 @@
         imagejpeg($resizedImage, null, 85); // Adjust quality as needed
         $raw = ob_get_clean ();
         // ob_end_flush ();
-        echo "<img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' />";
+        // echo "<img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' />";
+        echo "  <a href='${file}' data-pswp-width='${originalWidth}' data-pswp-height='${originalHeight}' target='_blank'>"
+            . "     <img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' alt='' />"
+            . " </a>";
         imagedestroy($originalImage);
         imagedestroy($resizedImage);
     };
@@ -128,8 +134,8 @@
     function thumbnail ($infile) {
         $mime = mime_content_type ($infile);
         if (strstr ($mime, "video/")) {
-            processVideo ();
-            // processImage ("fs2.webp");
+            processVideo ($infile);
+            // processImage ("fs2.jpg");
         } else {
             processImage ($infile);
         }
