@@ -57,7 +57,7 @@
         echo <<<EOD
             <footer class="footer mt-auto py-3 bg-body-tertiary">
                 <div class="container">
-                    <span class="text-body-secondary">Place sticky footer content here.</span>
+                    <span class="text-body-secondary">&#169; unclecheah</span>
                 </div>
             </footer>
         EOD;
@@ -70,16 +70,18 @@
     };
 
 
-    function card ($i, $img) {
+    function card ($fpath, $img) {
+        global $maxHeight;
+        $cardTitle = basename ($fpath);
         $output = " <div class='col-lg-2 col-md-4 col-sm-6 mb-4'>"
                 . "     <div class='card h-100'>"
-                . "         <div class='bg-image' style='height: 150px;'>"
-                . "             <a href='#!'>"
-                . "                 <img src='${img}' class='img-fluid'/>"
+                . "         <div class='bg-image' style='height: ${maxHeight}'>"
+                . "             <a href='?d=${fpath}'>"
+                . "                 <img class='img-fluid' src='${img}' />"
                 . "             </a>"
                 . "         </div>"
                 . "         <div class='card-body'>"
-                . "             <h5 class='card-title'>${i}</h5>"
+                . "             <h5 class='card-title'>${cardTitle}</h5>"
                 // . "             <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>"
                 . "         </div>"
                 . "     </div>"
@@ -91,8 +93,7 @@
 
     function processVideo ($file) {
         global $maxHeight;
-        // echo "<img class='mb-1 me-1' src='fs2.webp' height='${maxHeight}' />";
-        echo "  <a href='${file}' data-pswp-type='video' target='_blank'>"
+        echo "<a style='display:inline-block;' href='${file}' data-pswp-type='video' target='_blank'>"
             . "     <img class='mb-1 me-1' src='fs2.jpg' height='${maxHeight}' alt='' />"
             . " </a>";
     };
@@ -104,10 +105,9 @@
         $originalImage = imagecreatefromjpeg($file);
         $originalWidth = imagesx($originalImage);
         $originalHeight = imagesy($originalImage);
-        $aspectRatio = $originalWidth / $originalHeight;
         $scaleFactor = $maxHeight / $originalHeight;
         $newHeight = $maxHeight;
-        $newWidth = $scaleFactor * $originalWidth;
+        $newWidth = floor ($scaleFactor * $originalWidth);
 
         $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled($resizedImage, $originalImage, 0, 0, 0, 0, $newWidth, $newHeight, $originalWidth, $originalHeight);
@@ -122,8 +122,7 @@
         imagejpeg($resizedImage, null, 85); // Adjust quality as needed
         $raw = ob_get_clean ();
         // ob_end_flush ();
-        // echo "<img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' />";
-        echo "  <a href='${file}' data-pswp-width='${originalWidth}' data-pswp-height='${originalHeight}' target='_blank'>"
+        echo "<a style='display:inline-block;' href='${file}' data-pswp-width='${originalWidth}' data-pswp-height='${originalHeight}' target='_blank'>"
             . "     <img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' alt='' />"
             . " </a>";
         imagedestroy($originalImage);
