@@ -53,6 +53,59 @@
     }
 
 
+    // function breadcrumbs () {
+    //     echo <<<EOD
+    //         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    //           <ol class="breadcrumb">
+    //             <li class="breadcrumb-item"><a href="#">Home</a></li>
+    //             <li class="breadcrumb-item"><a href="#">Library</a></li>
+    //             <li class="breadcrumb-item active" aria-current="page">Data</li>
+    //           </ol>
+    //         </nav>
+    //     EOD;
+    // };
+
+    function breadcrumbsT () {
+        echo <<<EOD
+            <div class="container">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+                        <li class="breadcrumb-item">
+                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="/">
+                                <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+                                Home
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        EOD;
+    };
+
+
+    function breadcrumbs ($fpath) {
+        global $photoRoot;
+            // <div class="container">
+            //     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            //         <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+            //             <li class="breadcrumb-item">
+            //                 <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">
+            //                     <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+            //                     Home
+            //                 </a>
+            //             </li>
+            //             <li class="breadcrumb-item">
+            //                 <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
+            //             </li>
+            //             <li class="breadcrumb-item active" aria-current="page">
+            //                 Data
+            //             </li>
+            //         </ol>
+            //     </nav>
+            // </div>
+    };
+
+
     function footer () {
         echo <<<EOD
             <footer class="footer mt-auto py-3 bg-body-tertiary">
@@ -65,19 +118,24 @@
 
 
     function firstImg ($dir) {
-        $files = scandir ($dir);
-        return $dir . "/" . $files[2];
+        global $photoRoot;
+        $files = scandir ($photoRoot . "/" . $dir);
+        // echo "firstImg: " . $photoRoot . "/" . $dir . "<br />";
+        return $photoRoot . "/" . $dir . "/" . $files[2];
     };
 
 
     function card ($fpath, $img) {
         global $maxHeight;
+
         $cardTitle = basename ($fpath);
         $output = " <div class='col-lg-2 col-md-4 col-sm-6 mb-4'>"
                 . "     <div class='card h-100'>"
                 . "         <div class='bg-image' style='height: ${maxHeight}'>"
                 . "             <a href='?d=${fpath}'>"
-                . "                 <img class='img-fluid' src='${img}' />"
+                . "                 <div class='card-img'>"
+                . "                     <img class='img-fluid' src='${img}' />"
+                . "                 </div>"
                 . "             </a>"
                 . "         </div>"
                 . "         <div class='card-body'>"
@@ -100,9 +158,11 @@
 
 
     function processImage ($file) {
+        global $photoRoot;
         global $maxHeight;
 
-        $originalImage = imagecreatefromjpeg($file);
+        // echo $file . "<br />";
+        $originalImage = imagecreatefromjpeg($photoRoot . "/" . $file);
         $originalWidth = imagesx($originalImage);
         $originalHeight = imagesy($originalImage);
         $scaleFactor = $maxHeight / $originalHeight;
@@ -122,7 +182,7 @@
         imagejpeg($resizedImage, null, 85); // Adjust quality as needed
         $raw = ob_get_clean ();
         // ob_end_flush ();
-        echo "<a style='display:inline-block;' href='${file}' data-pswp-width='${originalWidth}' data-pswp-height='${originalHeight}' target='_blank'>"
+        echo "<a style='display:inline-block;' href='${photoRoot}/${file}' data-pswp-width='${originalWidth}' data-pswp-height='${originalHeight}' target='_blank'>"
             . "     <img class='mb-1 me-1' src='data:image/jpeg;base64," . base64_encode ($raw) . "' alt='' />"
             . " </a>";
         imagedestroy($originalImage);
@@ -131,8 +191,12 @@
 
 
     function thumbnail ($infile) {
-        $mime = mime_content_type ($infile);
-        if (strstr ($mime, "video/")) {
+        global $photoRoot;
+
+        // echo $photoRoot . "--" . $infile . "<br />";
+        $mime = mime_content_type ($photoRoot . "/" . $infile);
+        // echo $mime . "<br/>";
+        if (strstr ($mime, "video/") || strstr ($mime, "octet-stream")) {
             processVideo ($infile);
             // processImage ("fs2.jpg");
         } else {
@@ -142,14 +206,24 @@
 
 
     function getContents ($dir) {
+        global $photoRoot;
         global $folders;
         global $files;
 
-        $items = scandir($dir, 0);
+        $workingDir = $dir == "" ? $photoRoot : $photoRoot . "/" . $dir;
+
+        $items = scandir($workingDir, 0);
         for ($i = 0; $i < count($items); $i++) {
             if ($items[$i] == "." || $items[$i] == "..") continue;
-            if (is_dir ($dir . "/" . $items[$i])) array_push ($folders, $dir . "/" . $items[$i]);
-            else array_push ($files, $dir . "/" . $items[$i]);
+            if (is_dir ($workingDir . "/" . $items[$i])) {
+                array_push ($folders, $dir == '' ? $items[$i] : $dir . "/" . $items[$i]);
+                // echo $dir == '' ? $items[$i] . "<br />" : $dir . "/" . $items[$i] . "<br />";
+            }
+            else {
+                array_push ($files, $dir == '' ? $items[$i] : $dir . "/" . $items[$i]);
+                // echo $dir == '' ? $items[$i] . "<br />" : $dir . "/" . $items[$i] . "<br />";
+            }
+            // echo $dir == '' ? $items[$i] . "<br />" : $dir . "/" . $items[$i] . "<br />";
         }
     };
 ?>

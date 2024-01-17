@@ -15,6 +15,17 @@
         <script src='https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js'></script>
         <link rel="stylesheet" href="photoswipe/photoswipe.css" />
 
+        <style>
+            .card-img {
+                max-height: 200px;
+                overflow: hidden;
+            }
+            .card-img img {
+                width: 100%;
+                height: auto;
+            }
+        </style>
+
         <script type="module">
             import PhotoSwipeLightbox from './photoswipe/photoswipe-lightbox.esm.min.js';
             import PhotoSwipeVideoPlugin from './photoswipe/photoswipe-video-plugin.esm.min.js';
@@ -32,8 +43,38 @@
         </script>
 
         <script>
+            function breadcrumbs (fpath) {
+                tokens = ["Home"]
+                if (fpath) tokens = tokens.concat (fpath.split ("/"));
+                $('.breadcrumb-item').remove ();
+
+                alink = '';
+                for (token in tokens) {
+                    console.log (tokens[token]);
+                    if (token != 0) {
+                        if (alink == '') alink = tokens[token];
+                        else alink += '/' + tokens[token];
+                    }
+
+                    href = (token == 0 ? "/" : '?d=' + alink)
+                    ht = "  <li class='breadcrumb-item'>"
+                        + "     <a class='link-body-emphasis fw-semibold text-decoration-none' href='" + href + "'>"
+                        + (token == 0? "<svg class='bi' width='16' height='16'><use xlink:href='#house-door-fill'></use></svg>" : "")
+                        + tokens[token]
+                        + "     </a>"
+                        + " </li>";
+
+                    $(".breadcrumb").append (ht);
+                }
+
+            };
+
             function loadingComplete () {
                 console.log ("done!");
+                var params = new URLSearchParams (window.location.search)
+                console.log (params.has ('d'));
+                console.log (params.get ('d'));
+                breadcrumbs (params.get ('d'));
                 $.LoadingOverlay ('hide');
             };
         </script>
@@ -43,7 +84,8 @@
 
     <?php
         include 'photos.php';
-        $photoDir = 'data';
+        $photoRoot = 'data';
+        $photoDir = '';
 
         if (isset ($_GET['d'])) $photoDir = $_GET['d'];
     ?>
@@ -59,10 +101,12 @@
             });
         </script>
 
-        <header class="mb-5 mb-lg-7">
+        <header class="mb-3">
             <?php
                 // navgn ();
                 // bg ();
+                breadcrumbsT ();
+                // breadcrumbs ("/path/abc");
             ?>
         </header>
 
@@ -74,7 +118,7 @@
                     $files = array ();
                     getContents ($photoDir);
 
-                    echo "<h3 class='fw-bold text-center mt-3 mb-3'>" . $photoDir . "</h3>";
+                    echo "<h3 class='fw-bold text-center mb-3'>" . ($photoDir == '' ? "Home" : basename($photoDir)) . "</h3>";
 
                     //  folders
                     echo "<section class='mb-5 mb-lg-10'>";
