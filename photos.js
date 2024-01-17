@@ -10,8 +10,6 @@ function breadcrumbs (fpath) {
             else alink += '/' + tokens[token];
         }
 
-        console.log (token);
-        console.log (tokens.length);
         href = "href='" + (token == 0 ? "/" : '?d=' + alink) + "'";
         if (token == tokens.length - 1) href += " style='pointer-events: none;'";
 
