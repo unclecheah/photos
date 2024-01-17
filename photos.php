@@ -63,18 +63,18 @@
 
     function breadcrumbsT () {
         echo <<<EOD
-        <div class="container">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
-        <li class="breadcrumb-item">
-        <a class="link-body-emphasis fw-semibold text-decoration-none" href="/">
-        <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
-        Home
-        </a>
-        </li>
-        </ol>
-        </nav>
-        </div>
+            <div class="container">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+                        <li class="breadcrumb-item">
+                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="/">
+                                <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+                                Home
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
         EOD;
     };
 

@@ -10,9 +10,13 @@ function breadcrumbs (fpath) {
             else alink += '/' + tokens[token];
         }
 
-        href = (token == 0 ? "/" : '?d=' + alink)
+        console.log (token);
+        console.log (tokens.length);
+        href = "href='" + (token == 0 ? "/" : '?d=' + alink) + "'";
+        if (token == tokens.length - 1) href += " style='pointer-events: none;'";
+
         ht = "  <li class='breadcrumb-item'>"
-            + "     <a class='link-body-emphasis fw-semibold text-decoration-none' href='" + href + "'>"
+            + "     <a class='link-body-emphasis fw-semibold text-decoration-none' " + href + ">"
             + (token == 0? "<svg class='bi' width='16' height='16'><use xlink:href='#house-door-fill'></use></svg>" : "")
             + tokens[token]
             + "     </a>"
