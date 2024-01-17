@@ -47,10 +47,7 @@
 
     <?php
         include 'photos.php';
-        $photoRoot = 'data';
         $photoDir = '';
-        $imgFilmStrip = 'fs2.jpg';
-        $maxHeight = 100;               //  max height of thumbnail
 
         if (isset ($_GET['d'])) $photoDir = $_GET['d'];
     ?>

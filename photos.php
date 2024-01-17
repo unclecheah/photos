@@ -1,4 +1,9 @@
 <?php
+    $photoRoot = 'data';
+    $imgFilmStrip = 'fs2.jpg';
+    $maxHeight = 100;               //  max height of thumbnail
+
+
     function navgn () {
         echo <<<EOD
         <nav style="z-index: 1; min-height: 58.9px;" class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -61,7 +66,7 @@
     };
 
 
-    function breadcrumbsT () {
+    function breadcrumbsT () {              //  breadcrumbs template, show 'Home' only
         echo <<<EOD
             <div class="container">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
