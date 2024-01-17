@@ -53,60 +53,33 @@
     }
 
 
-    // function breadcrumbs () {
-    //     echo <<<EOD
-    //         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-    //           <ol class="breadcrumb">
-    //             <li class="breadcrumb-item"><a href="#">Home</a></li>
-    //             <li class="breadcrumb-item"><a href="#">Library</a></li>
-    //             <li class="breadcrumb-item active" aria-current="page">Data</li>
-    //           </ol>
-    //         </nav>
-    //     EOD;
-    // };
+    function pHeader () {
+        echo "<header class='mb-3'>";
+        navgn ();
+        bg ();
+        echo "</header>";
+    };
+
 
     function breadcrumbsT () {
         echo <<<EOD
-            <div class="container">
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
-                        <li class="breadcrumb-item">
-                            <a class="link-body-emphasis fw-semibold text-decoration-none" href="/">
-                                <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
-                                Home
-                            </a>
-                        </li>
-                    </ol>
-                </nav>
-            </div>
+        <div class="container">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
+        <li class="breadcrumb-item">
+        <a class="link-body-emphasis fw-semibold text-decoration-none" href="/">
+        <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
+        Home
+        </a>
+        </li>
+        </ol>
+        </nav>
+        </div>
         EOD;
     };
 
 
-    function breadcrumbs ($fpath) {
-        global $photoRoot;
-            // <div class="container">
-            //     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            //         <ol class="breadcrumb breadcrumb-custom overflow-hidden text-center bg-body-tertiary border rounded-3">
-            //             <li class="breadcrumb-item">
-            //                 <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">
-            //                     <svg class="bi" width="16" height="16"><use xlink:href="#house-door-fill"></use></svg>
-            //                     Home
-            //                 </a>
-            //             </li>
-            //             <li class="breadcrumb-item">
-            //                 <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">Library</a>
-            //             </li>
-            //             <li class="breadcrumb-item active" aria-current="page">
-            //                 Data
-            //             </li>
-            //         </ol>
-            //     </nav>
-            // </div>
-    };
-
-
-    function footer () {
+    function pFooter () {
         echo <<<EOD
             <footer class="footer mt-auto py-3 bg-body-tertiary">
                 <div class="container">
@@ -120,7 +93,6 @@
     function firstImg ($dir) {
         global $photoRoot;
         $files = scandir ($photoRoot . "/" . $dir);
-        // echo "firstImg: " . $photoRoot . "/" . $dir . "<br />";
         return $photoRoot . "/" . $dir . "/" . $files[2];
     };
 
@@ -150,9 +122,12 @@
 
 
     function processVideo ($file) {
+        global $photoRoot;
         global $maxHeight;
-        echo "<a style='display:inline-block;' href='${file}' data-pswp-type='video' target='_blank'>"
-            . "     <img class='mb-1 me-1' src='fs2.jpg' height='${maxHeight}' alt='' />"
+        global $imgFilmStrip;
+
+        echo "<a style='display:inline-block;' href='${photoRoot}/${file}' data-pswp-type='video' target='_blank'>"
+            . "     <img class='mb-1 me-1' src='${imgFilmStrip}' height='${maxHeight}' alt='' />"
             . " </a>";
     };
 
@@ -161,7 +136,6 @@
         global $photoRoot;
         global $maxHeight;
 
-        // echo $file . "<br />";
         $originalImage = imagecreatefromjpeg($photoRoot . "/" . $file);
         $originalWidth = imagesx($originalImage);
         $originalHeight = imagesy($originalImage);
@@ -193,12 +167,9 @@
     function thumbnail ($infile) {
         global $photoRoot;
 
-        // echo $photoRoot . "--" . $infile . "<br />";
         $mime = mime_content_type ($photoRoot . "/" . $infile);
-        // echo $mime . "<br/>";
         if (strstr ($mime, "video/") || strstr ($mime, "octet-stream")) {
             processVideo ($infile);
-            // processImage ("fs2.jpg");
         } else {
             processImage ($infile);
         }
@@ -215,15 +186,12 @@
         $items = scandir($workingDir, 0);
         for ($i = 0; $i < count($items); $i++) {
             if ($items[$i] == "." || $items[$i] == "..") continue;
+
             if (is_dir ($workingDir . "/" . $items[$i])) {
                 array_push ($folders, $dir == '' ? $items[$i] : $dir . "/" . $items[$i]);
-                // echo $dir == '' ? $items[$i] . "<br />" : $dir . "/" . $items[$i] . "<br />";
-            }
-            else {
+            } else {
                 array_push ($files, $dir == '' ? $items[$i] : $dir . "/" . $items[$i]);
-                // echo $dir == '' ? $items[$i] . "<br />" : $dir . "/" . $items[$i] . "<br />";
             }
-            // echo $dir == '' ? $items[$i] . "<br />" : $dir . "/" . $items[$i] . "<br />";
         }
     };
 ?>

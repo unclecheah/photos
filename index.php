@@ -14,6 +14,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src='https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js'></script>
         <link rel="stylesheet" href="photoswipe/photoswipe.css" />
+        <script src="photos.js"></script>
 
         <style>
             .card-img {
@@ -41,44 +42,6 @@
 
             lightbox.init ();
         </script>
-
-        <script>
-            function breadcrumbs (fpath) {
-                tokens = ["Home"]
-                if (fpath) tokens = tokens.concat (fpath.split ("/"));
-                $('.breadcrumb-item').remove ();
-
-                alink = '';
-                for (token in tokens) {
-                    console.log (tokens[token]);
-                    if (token != 0) {
-                        if (alink == '') alink = tokens[token];
-                        else alink += '/' + tokens[token];
-                    }
-
-                    href = (token == 0 ? "/" : '?d=' + alink)
-                    ht = "  <li class='breadcrumb-item'>"
-                        + "     <a class='link-body-emphasis fw-semibold text-decoration-none' href='" + href + "'>"
-                        + (token == 0? "<svg class='bi' width='16' height='16'><use xlink:href='#house-door-fill'></use></svg>" : "")
-                        + tokens[token]
-                        + "     </a>"
-                        + " </li>";
-
-                    $(".breadcrumb").append (ht);
-                }
-
-            };
-
-            function loadingComplete () {
-                console.log ("done!");
-                var params = new URLSearchParams (window.location.search)
-                console.log (params.has ('d'));
-                console.log (params.get ('d'));
-                breadcrumbs (params.get ('d'));
-                $.LoadingOverlay ('hide');
-            };
-        </script>
-
     </head>
 
 
@@ -86,6 +49,8 @@
         include 'photos.php';
         $photoRoot = 'data';
         $photoDir = '';
+        $imgFilmStrip = 'fs2.jpg';
+        $maxHeight = 100;               //  max height of thumbnail
 
         if (isset ($_GET['d'])) $photoDir = $_GET['d'];
     ?>
@@ -101,24 +66,16 @@
             });
         </script>
 
-        <header class="mb-3">
-            <?php
-                // navgn ();
-                // bg ();
-                breadcrumbsT ();
-                // breadcrumbs ("/path/abc");
-            ?>
-        </header>
-
-        <main>
+        <?php //pHeader (); ?>
+        <main class='mb-3'>
             <div class="container-fluid">
                 <?php
-                    $maxHeight = 100;               //  max height of thumbnail
                     $folders = array ();
                     $files = array ();
                     getContents ($photoDir);
 
-                    echo "<h3 class='fw-bold text-center mb-3'>" . ($photoDir == '' ? "Home" : basename($photoDir)) . "</h3>";
+                    echo "<h3 class='fw-bold text-center my-3'>" . ($photoDir == '' ? "Home" : basename($photoDir)) . "</h3>";
+                    breadcrumbsT ();
 
                     //  folders
                     echo "<section class='mb-5 mb-lg-10'>";
@@ -141,8 +98,8 @@
 
             </div>
         </main>
+        <?php pFooter (); ?>
 
-        <?php footer (); ?>
         <script type="text/javascript" src="mdb/js/mdb.umd.min.js"></script>
     </body>
 </html>
