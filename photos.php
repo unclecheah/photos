@@ -97,10 +97,10 @@
 
     function firstImg ($dir) {
         global $photoRoot;
-        $files = scandir ($photoRoot . "/" . $dir);
-        // return $photoRoot . "/" . $dir . "/" . $files[2];
+        $path = $photoRoot . "/" . $dir;
+        $files = scandir ($path);
         for ($i = 0; $i < count($files); $i ++) {
-            if (!is_dir ($files[$i])) return $photoRoot . "/" . $dir . "/" . $files[2];
+            if (!is_dir ($path . "/" . $files[$i])) return $path . "/" . $files[$i];
         }
 
         return "camera.jpg";
