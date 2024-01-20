@@ -6,7 +6,7 @@ import imghdr
 
 desiredWidth = 1920
 desiredHeight = 1280
-srcFolder = 'data'
+srcFolder = '_select'
 dstFolder = 'reduced'
 
 

@@ -98,7 +98,12 @@
     function firstImg ($dir) {
         global $photoRoot;
         $files = scandir ($photoRoot . "/" . $dir);
-        return $photoRoot . "/" . $dir . "/" . $files[2];
+        // return $photoRoot . "/" . $dir . "/" . $files[2];
+        for ($i = 0; $i < count($files); $i ++) {
+            if (!is_dir ($files[$i])) return $photoRoot . "/" . $dir . "/" . $files[2];
+        }
+
+        return "camera.jpg";
     };
 
 
