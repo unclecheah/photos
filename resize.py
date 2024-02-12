@@ -18,6 +18,18 @@ def resize (infile, outfile):
         return
 
     img = Image.open (infile)
+
+    for orientation in ExifTags.TAGS.keys():
+        if ExifTags.TAGS[orientation] == 'Orientation':
+            break;
+    exif = img._getexif ()
+    if exif[orientation] == 3:
+        img = img.rotate (180, expand=True)
+    elif exif[orientation] == 6:
+        img = img.rotate (270, expand=True)
+    elif exif[orientation] == 8:
+        img = img.rotate (90, expand=True)
+
     factorW = img.size[0] / desiredWidth
     factorH = img.size[1] / desiredHeight
     factor = max (factorW, factorH)
