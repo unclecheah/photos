@@ -25,6 +25,22 @@
                 width: 100%;
                 height: auto;
             }
+            .vid {
+                display: inline-block;
+                margin-bottom: -50;
+                /* position: relative; */
+                /* float: left; */
+            }
+            .overlay {
+                position: absolute;
+                top:0;
+                left: 0;
+            }
+            .overlay2 {
+                position: absolute;
+                top:0;
+                right: 0;
+            }
         </style>
 
         <script type="module">

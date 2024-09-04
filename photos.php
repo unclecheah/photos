@@ -95,16 +95,42 @@
     };
 
 
+    // function firstImg ($dir) {
+    //     global $photoRoot;
+    //     $path = $photoRoot . "/" . $dir;
+    //
+    //     $files = scandir ($path);
+    //     for ($i = 0; $i < count($files); $i ++) {
+    //         if (!is_dir ($path . "/" . $files[$i])) return $path . "/" . $files[$i];
+    //     }
+    //
+    //     return "camera.jpg";
+    // };
+    function recurseImg ($dir) {
+        $found = false;
+
+        if (is_dir($dir) && !$found) {
+            $files = glob ($dir . '*', GLOB_MARK);
+            foreach ($files as $file) {
+                if (!is_dir($file)) {
+                    $found = true;
+                    // echo $file . "<br />";
+                    return $file;
+                }
+                return recurseImg ($file);
+            }
+        }
+    };
+
     function firstImg ($dir) {
         global $photoRoot;
         $path = $photoRoot . "/" . $dir;
-        $files = scandir ($path);
-        for ($i = 0; $i < count($files); $i ++) {
-            if (!is_dir ($path . "/" . $files[$i])) return $path . "/" . $files[$i];
-        }
 
-        return "camera.jpg";
-    };
+        $result = recurseImg ($path);
+        if (!$result) return "camera.jpg";
+        return $result;
+    }
+
 
 
     function card ($fpath, $img) {
@@ -136,9 +162,19 @@
         global $maxHeight;
         global $imgFilmStrip;
 
-        echo "<a style='display:inline-block;' href='${photoRoot}/${file}' data-pswp-type='video' target='_blank'>"
-            . "     <img class='mb-1 me-1' src='${imgFilmStrip}' height='${maxHeight}' alt='' />"
-            . " </a>";
+        // echo "<a style='display:inline-block;' href='${photoRoot}/${file}' data-pswp-type='video' target='_blank'>"
+        //     . "     <img class='mb-1 me-1' src='${imgFilmStrip}' height='${maxHeight}' alt='' />"
+        //     . " </a>";
+        // <img class="overlay" src="img/strip.webp" height='${maxHeight}' width=20 />
+        // <img class="overlay2" src="img/strip.webp" height='${maxHeight}' width=20 />
+
+        echo <<<EOD
+            <a style='display:inline-block;' href='${photoRoot}/${file}' data-pswp-type='video' target='_blank'>
+                <div class='vid'>
+                    <video class='mb-1 me-1' src='${photoRoot}/${file}' height='${maxHeight}' alt='' muted></video>
+                </div>
+            </a>
+        EOD;
     };
 
 
