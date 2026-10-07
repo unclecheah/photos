@@ -1,0 +1,23 @@
+{
+	"name": "photo-site-shell",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite --host 0.0.0.0",
+		"build": "vite build",
+		"preview": "vite preview --host 0.0.0.0",
+		"test": "playwright test"
+	},
+	"dependencies": {
+		"jquery": "3.7.1"
+	},
+	"devDependencies": {
+		"@playwright/test": "1.56.0",
+		"sass": "1.105.1",
+		"vite": "8.3.3"
+	},
+	"engines": {
+		"node": ">=22.12.0"
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"layout": {
+		"minWidth": 320
+	},
+	"thumbnails": {
+		"desktopHeight": 220,
+		"tabletHeight": 190,
+		"mobileColumns": 2,
+		"gap": 8,
+		"fadeDuration": 180
+	}
+}
