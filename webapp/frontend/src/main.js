@@ -13,7 +13,7 @@ const target = document.querySelector('#app');
 const params = new URLSearchParams(location.search);
 
 const source = params.get('source') === 'http'
-	? new HttpSource({ endpoint: `${import.meta.env.BASE_URL}demo/folder.json` })
+	? new HttpSource({ endpoint: '/api/folder.php' })
 	: new DemoSource();
 
 const app = new AppController(target, source);
