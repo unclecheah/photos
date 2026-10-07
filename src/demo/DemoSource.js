@@ -1,16 +1,48 @@
-const asset = name => `${import.meta.env.BASE_URL}demo/${name}.jpg`;
+const asset = (name, extension = 'jpg') => `${import.meta.env.BASE_URL}demo/${name}.${extension}`;
 const names = ['Temple at dusk', 'City lights', 'Old streets', 'Quiet afternoon', 'Mountain view', 'Along the river'];
+const sampleSizes = [
+	[800, 534],
+	[800, 519],
+	[800, 533],
+	[800, 533],
+	[800, 534],
+	[800, 617]
+];
+
+function demoVideo(id) {
+	return {
+		id,
+		name: 'Flowers in the breeze',
+		type: 'video',
+		thumbnail: asset('5'),
+		src: asset('flower', 'mp4'),
+		width: 960,
+		height: 540,
+		duration: '0:05'
+	};
+}
 
 function media(count, prefix = 'sample') {
-	return Array.from({ length: count }, (_, index) => ({
-		id: `${prefix}-${index}`,
-		name: names[index % names.length],
-		type: index % 5 === 4 ? 'video' : 'photo',
-		thumbnail: asset(String(index % 6 + 1)),
-		width: index % 4 === 1 ? 800 : 1200,
-		height: 800,
-		duration: index % 5 === 4 ? '0:36' : null
-	}));
+	return Array.from({ length: count }, (_, index) => {
+		const id = `${prefix}-${index}`;
+
+		if (index % 5 === 4) return demoVideo(id);
+
+		const sampleIndex = index % sampleSizes.length;
+		const [width, height] = sampleSizes[sampleIndex];
+		const imageUrl = asset(String(sampleIndex + 1));
+
+		return {
+			id,
+			name: names[index % names.length],
+			type: 'photo',
+			thumbnail: imageUrl,
+			src: imageUrl,
+			width,
+			height,
+			duration: null
+		};
+	});
 }
 
 const records = {

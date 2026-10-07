@@ -10,7 +10,8 @@
 		"test": "playwright test"
 	},
 	"dependencies": {
-		"jquery": "3.7.1"
+		"jquery": "3.7.1",
+		"photoswipe": "^5.4.4"
 	},
 	"devDependencies": {
 		"@playwright/test": "1.56.0",

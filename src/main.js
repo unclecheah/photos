@@ -3,21 +3,38 @@ import DemoSource from './demo/DemoSource.js';
 import DemoControls from './demo/DemoControls.js';
 import GalleryConfig from './app/GalleryConfig.js';
 import gCubeOverlay from './shared/cubeOverlay.js';
+import MediaViewer from './components/MediaViewer.js';
+import HttpSource from './data/HttpSource.js';
 import './styles/theme.scss';
 
 const config = new GalleryConfig();
 config.apply();
 const target = document.querySelector('#app');
-const source = new DemoSource();
-const app = new AppController(target, source);
+const params = new URLSearchParams(location.search);
 
-// Shell-only feedback. Replace this listener with MediaViewer.open(...) later.
+const source = params.get('source') === 'http'
+	? new HttpSource({ endpoint: `${import.meta.env.BASE_URL}demo/folder.json` })
+	: new DemoSource();
+
+const app = new AppController(target, source);
+const mediaViewer = new MediaViewer();
+
 const onSelect = event => {
-	app.shell.status.textContent = `Selected: ${event.detail.item.name}. The media viewer will be added in the next step.`;
+	const { items, index } = event.detail;
+	app.shell.status.textContent = '';
+
+	try {
+		mediaViewer.open(items, index);
+	} catch (error) {
+		mediaViewer.destroy();
+		app.shell.status.textContent = 'Unable to open this media item.';
+		console.error('Media viewer failed:', error);
+	}
 };
 target.addEventListener('gallery:media-select', onSelect);
 
-if (new URLSearchParams(location.search).has('test')) new DemoControls(app, source);
+if (params.has('test') && source instanceof DemoSource) new DemoControls(app, source);
+
 app.shell.setBusy(true);
 await gCubeOverlay.start();
 try {
@@ -30,6 +47,7 @@ try {
 if (import.meta.hot) {
 	import.meta.hot.dispose(() => {
 		target.removeEventListener('gallery:media-select', onSelect);
+		mediaViewer.destroy();
 		app.destroy();
 	});
 }

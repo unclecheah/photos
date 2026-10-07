@@ -1,0 +1,64 @@
+.pswp.media-viewer {
+	--pswp-root-z-index: 1500;
+	--pswp-bg: #101720;
+	--pswp-icon-color: #e4edf7;
+	--pswp-icon-color-secondary: #182330;
+
+	.pswp__preloader {
+		display: none;
+	}
+
+	.pswp__button {
+		border-radius: 8px;
+
+		&:focus-visible {
+			outline: 3px solid var(--ui-focus);
+			outline-offset: -3px;
+		}
+	}
+
+	.media-video {
+		position: relative;
+		overflow: hidden;
+		border-radius: 8px;
+		background: #000;
+
+		&__player {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+
+			&:focus-visible {
+				outline: 3px solid var(--ui-focus);
+				outline-offset: -3px;
+			}
+		}
+
+		&__message {
+			position: absolute;
+			top: 12px;
+			left: 12px;
+			right: 12px;
+			margin: 0;
+			padding: 10px 12px;
+			border-radius: 8px;
+			background: var(--ui-surface, #182330);
+			color: var(--ui-text, #e4edf7);
+			font-size: 0.875rem;
+			line-height: 1.4;
+			pointer-events: none;
+
+			&[hidden] {
+				display: none;
+			}
+		}
+	}
+}
+
+body:has(.pswp.media-viewer) {
+	#loadingOverlay {
+		z-index: 1510;
+		background-color: transparent;
+	}
+}

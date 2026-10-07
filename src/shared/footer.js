@@ -3,8 +3,8 @@ import './footer.scss';
 
 class Footer {
 	constructor({ text = '© unclecheah' } = {}) {
-		this.$element = $('<footer>', { class: 'choir-footer', });
-		this.$text = $('<small>', { class: 'choir-footer__text', })
+		this.$element = $('<footer>', { class: 'app-footer', });
+		this.$text = $('<small>', { class: 'app-footer__text', })
 			.text(text)
 			.appendTo(this.$element);
 

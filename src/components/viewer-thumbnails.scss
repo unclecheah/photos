@@ -1,0 +1,153 @@
+.pswp.media-viewer {
+	// Allow native scrolling in the strip.
+	touch-action: auto;
+
+	// Keep PhotoSwipe in charge of gestures over the main media.
+	.pswp__scroll-wrap {
+		touch-action: none;
+	}
+
+	.viewer-thumbnails-host {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+	}
+
+	.viewer-thumbnails {
+		padding: 8px 12px;
+		padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+		border-top: 1px solid var(--ui-border, #344355);
+		background: var(--ui-surface, #182330);
+		color: var(--ui-text, #e4edf7);
+		touch-action: pan-x;
+
+		&[hidden] {
+			display: none;
+		}
+
+		&__track {
+			display: flex;
+			gap: 8px;
+			margin: 0;
+			padding: 4px;
+			list-style: none;
+			overflow-x: auto;
+			overflow-y: hidden;
+			overscroll-behavior-x: contain;
+			scrollbar-width: thin;
+		}
+
+		&__item {
+			flex: 0 0 auto;
+
+			&:first-child {
+				margin-left: auto;
+			}
+
+			&:last-child {
+				margin-right: auto;
+			}
+		}
+	}
+
+	.viewer-thumbnail {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 84px;
+		height: 60px;
+		padding: 0;
+		overflow: hidden;
+		border: 2px solid transparent;
+		border-radius: 8px;
+		background: var(--ui-surface, #182330);
+		color: var(--ui-muted, #a0afc0);
+		cursor: pointer;
+
+		> svg {
+			width: 22px;
+			height: 22px;
+		}
+
+		.thumbnail {
+			position: absolute;
+			inset: 0;
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			opacity: 0;
+			transition: opacity var(--thumbnail-fade-duration, 180ms) ease;
+
+			&.is-loaded {
+				opacity: 1;
+			}
+
+			&.image-failed {
+				opacity: 0;
+			}
+		}
+
+		&[aria-current='true'] {
+			border-color: var(--ui-focus, #9ac7ff);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--ui-focus, #9ac7ff);
+			outline-offset: 2px;
+		}
+
+		&__badge {
+			position: absolute;
+			top: 3px;
+			left: 3px;
+			display: grid;
+			place-items: center;
+			width: 22px;
+			height: 20px;
+			border-radius: 4px;
+			background: var(--ui-surface, #182330);
+			color: var(--ui-text, #e4edf7);
+			pointer-events: none;
+
+			svg {
+				width: 14px;
+				height: 14px;
+			}
+		}
+	}
+
+	.pswp__button--thumbnails {
+		align-self: center;
+		width: auto;
+		height: 36px;
+		margin: 0 8px;
+		padding: 0 10px;
+		border: 1px solid var(--ui-border, #344355);
+		border-radius: 8px;
+		background: var(--ui-surface, #182330);
+		color: var(--ui-text, #e4edf7);
+		font: inherit;
+		font-size: 0.8rem;
+		line-height: 1;
+
+		&[aria-expanded='true'] {
+			border-color: var(--ui-focus, #9ac7ff);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.viewer-thumbnail {
+			width: 68px;
+			height: 52px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.viewer-thumbnail .thumbnail {
+			transition: none;
+		}
+	}
+}
