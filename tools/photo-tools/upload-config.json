@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"protocol": "ftp",
+	"host": "unclecheah.com",
+	"port": 21,
+	"username": "unclecheah@unclecheah.com",
+	"remote_data_dir": "test.unclecheah.com/data",
+	"timeout": 30
+}

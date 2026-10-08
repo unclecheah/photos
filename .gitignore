@@ -2,3 +2,8 @@ node_modules/
 dist/
 test-results/
 playwright-report/
+.venv-photos/
+ffmpeg/
+__pycache__/
+data/
+.cache/

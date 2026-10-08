@@ -1,0 +1,10 @@
+{
+	"version": 1,
+	"data_root": "../../webapp/backend/public/data",
+	"max_edge": 640,
+	"quality": 85,
+	"root_name": "All photos",
+	"ffmpeg": null,
+	"ffprobe": null,
+	"timeout": 60
+}

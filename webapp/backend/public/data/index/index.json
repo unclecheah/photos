@@ -1,6 +1,24 @@
 {
 	"version": 1,
 	"name": "All photos",
-	"folders": [],
-	"media": []
+	"folders": [
+		{
+			"path": "Japan",
+			"name": "Japan",
+			"itemCount": 2,
+			"cover": "/data/thumbnail/Japan/2.jpg.jpg"
+		}
+	],
+	"media": [
+		{
+			"id": "1.jpg",
+			"name": "1",
+			"type": "photo",
+			"src": "/data/max/1.jpg",
+			"thumbnail": "/data/thumbnail/1.jpg.jpg",
+			"width": 347,
+			"height": 349,
+			"duration": null
+		}
+	]
 }
