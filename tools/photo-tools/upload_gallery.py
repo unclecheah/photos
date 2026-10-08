@@ -5,6 +5,7 @@ import ftplib
 import getpass
 import sys
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from check_upload_connection import read_credentials
 from ftp_client import FtpClient
@@ -13,6 +14,7 @@ from preparation_config import PreparationConfig
 from upload_config import UploadConfig
 from upload_cache import UploadCache
 from upload_planner import UploadPlanner
+from upload_images import UploadImagePreparer
 
 
 def arguments():
@@ -30,6 +32,13 @@ def run(args) -> None:
 	preparation = PreparationConfig.from_arguments(args)
 	connection = UploadConfig.load(args.upload_config)
 	plan = UploadPlanner(preparation.data_root).build()
+	with TemporaryDirectory(prefix="gallery-upload-") as staging:
+		plan = UploadImagePreparer(Path(staging), connection.photo_max_edge,
+			connection.photo_quality).prepare(plan)
+		_run_plan(args, preparation, connection, plan)
+
+
+def _run_plan(args, preparation, connection, plan) -> None:
 	print(f"Local data directory: {preparation.data_root}")
 	print(f"FTP destination: {connection.host}:{connection.port} / {connection.remote_data_dir}")
 	print(f"Upload plan: {len(plan.items)} files; {plan.total_bytes:,} bytes.")

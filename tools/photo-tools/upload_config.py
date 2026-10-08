@@ -14,6 +14,8 @@ class UploadConfig:
 	port: int = 21
 	username: str = ""
 	timeout: float = 30
+	photo_max_edge: int = 1920
+	photo_quality: int = 90
 
 	@classmethod
 	def load(cls, path: Path):
@@ -34,6 +36,10 @@ class UploadConfig:
 		return config
 
 	def _validate(self) -> None:
+		if type(self.photo_max_edge) is not int or not 1 <= self.photo_max_edge <= 8192:
+			raise ValueError("photo_max_edge must be an integer between 1 and 8192")
+		if type(self.photo_quality) is not int or not 1 <= self.photo_quality <= 95:
+			raise ValueError("photo_quality must be an integer between 1 and 95")
 		if self.protocol != "ftp":
 			raise ValueError("This connection module supports plain FTP only")
 		if not isinstance(self.host, str) or not self.host:

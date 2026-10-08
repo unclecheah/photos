@@ -12,9 +12,10 @@ config.apply();
 const target = document.querySelector('#app');
 const params = new URLSearchParams(location.search);
 
-const source = params.get('source') === 'http'
-	? new HttpSource({ endpoint: '/api/folder.php' })
-	: new DemoSource();
+// Real folders and media are the default. Use ?source=demo for sample data.
+const source = params.get('source') === 'demo'
+	? new DemoSource()
+	: new HttpSource({ endpoint: '/api/folder.php' });
 
 const app = new AppController(target, source);
 const mediaViewer = new MediaViewer();

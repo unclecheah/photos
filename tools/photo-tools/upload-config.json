@@ -5,5 +5,7 @@
 	"port": 21,
 	"username": "unclecheah@unclecheah.com",
 	"remote_data_dir": "test.unclecheah.com/data",
-	"timeout": 30
+	"timeout": 30,
+	"photo_max_edge": 1920,
+	"photo_quality": 90
 }
