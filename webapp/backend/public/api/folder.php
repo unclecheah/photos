@@ -21,7 +21,7 @@ try {
 		}
 
 		$backendRoot = dirname(__DIR__, 2);
-		require_once $backendRoot . '/src/FolderService.php';
+		require_once $backendRoot . '/privatePhoto/FolderService.php';
 
 		$service = new FolderService(dirname(__DIR__) . '/data/index');
 		$result = $service->getFolder($path);
