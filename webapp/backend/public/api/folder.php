@@ -23,7 +23,7 @@ try {
 		$backendRoot = dirname(__DIR__, 2);
 		require_once $backendRoot . '/src/FolderService.php';
 
-		$service = new FolderService($backendRoot . '/public/data/index');
+		$service = new FolderService(dirname(__DIR__) . '/data/index');
 		$result = $service->getFolder($path);
 	}
 } catch (InvalidArgumentException $error) {

@@ -24,6 +24,32 @@
 	--ui-focus: #1e61b8;
 }
 
+// Deep blue palette.
+:root[data-theme="blue"] {
+	color-scheme: dark;
+	--ui-bg: #0c2038;
+	--ui-surface: #12304e;
+	--ui-hover: #1c4267;
+	--ui-text: #e7f2ff;
+	--ui-muted: #abc5df;
+	--ui-border: #365878;
+	--ui-accent: #81caff;
+	--ui-focus: #b2e2ff;
+}
+
+// Warm paper palette.
+:root[data-theme="sepia"] {
+	color-scheme: light;
+	--ui-bg: #f3eadb;
+	--ui-surface: #fff8ec;
+	--ui-hover: #e9dcc7;
+	--ui-text: #3f3023;
+	--ui-muted: #71604a;
+	--ui-border: #c9b79c;
+	--ui-accent: #875020;
+	--ui-focus: #975622;
+}
+
 * { box-sizing: border-box; }
 body {
 	margin: 0;

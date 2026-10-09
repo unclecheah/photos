@@ -3,22 +3,101 @@
 	"name": "All photos",
 	"folders": [
 		{
+			"path": "Australia",
+			"name": "Australia",
+			"itemCount": 108,
+			"cover": "/data/thumbnail/Australia/066%20Margaret%20River.jpg.jpg"
+		},
+		{
+			"path": "Bali",
+			"name": "Bali",
+			"itemCount": 97,
+			"cover": "/data/thumbnail/Bali/Bali-20231218-143730.jpg.jpg"
+		},
+		{
+			"path": "Hong Kong",
+			"name": "Hong Kong",
+			"itemCount": 33,
+			"cover": "/data/thumbnail/Hong%20Kong/DSCN0184.JPG.jpg"
+		},
+		{
+			"path": "HP",
+			"name": "HP",
+			"itemCount": 20,
+			"cover": "/data/thumbnail/HP/20170113_161829.jpg.jpg"
+		},
+		{
+			"path": "Israel",
+			"name": "Israel",
+			"itemCount": 56,
+			"cover": "/data/thumbnail/Israel/Israel_0028.jpg.jpg"
+		},
+		{
 			"path": "Japan",
 			"name": "Japan",
-			"itemCount": 2,
-			"cover": "/data/thumbnail/Japan/2.jpg.jpg"
+			"itemCount": 64,
+			"cover": "/data/thumbnail/Japan/IMG_4054.JPG.jpg"
+		},
+		{
+			"path": "Jeju 2024",
+			"name": "Jeju 2024",
+			"itemCount": 175,
+			"cover": "/data/thumbnail/Jeju%202024/Jeju-20241215-085026-YongduamRock.jpg.jpg"
+		},
+		{
+			"path": "Korea 2026",
+			"name": "Korea 2026",
+			"itemCount": 57,
+			"cover": "/data/thumbnail/Korea%202026/20260310_184153.jpg.jpg"
+		},
+		{
+			"path": "Linden",
+			"name": "Linden",
+			"itemCount": 4,
+			"cover": "/data/thumbnail/Linden/cheah.jpg.jpg"
+		},
+		{
+			"path": "London",
+			"name": "London",
+			"itemCount": 15,
+			"cover": "/data/thumbnail/London/london_0018.jpg.jpg"
+		},
+		{
+			"path": "Malaysia",
+			"name": "Malaysia",
+			"itemCount": 49,
+			"cover": "/data/thumbnail/Malaysia/3.%20DSCF5150a.JPG.jpg"
+		},
+		{
+			"path": "New Zealand",
+			"name": "New Zealand",
+			"itemCount": 94,
+			"cover": "/data/thumbnail/New%20Zealand/NewZealand-20191130-17.28.16.jpg.jpg"
+		},
+		{
+			"path": "Papal Mass 2024",
+			"name": "Papal Mass 2024",
+			"itemCount": 52,
+			"cover": "/data/thumbnail/Papal%20Mass%202024/20240911_105322.jpg.jpg"
+		},
+		{
+			"path": "Singapore",
+			"name": "Singapore",
+			"itemCount": 72,
+			"cover": "/data/thumbnail/Singapore/20181124_065801.jpg.jpg"
+		},
+		{
+			"path": "Taiwan",
+			"name": "Taiwan",
+			"itemCount": 33,
+			"cover": "/data/thumbnail/Taiwan/IMG_1326.JPG.jpg"
+		},
+		{
+			"path": "United States",
+			"name": "United States",
+			"itemCount": 0,
+			"cover": "/data/thumbnail/United%20States/Arizona/Arizona_0006.jpg.jpg"
 		}
 	],
-	"media": [
-		{
-			"id": "1.jpg",
-			"name": "1",
-			"type": "photo",
-			"src": "/data/max/1.jpg",
-			"thumbnail": "/data/thumbnail/1.jpg.jpg",
-			"width": 347,
-			"height": 349,
-			"duration": null
-		}
-	]
+	"media": []
 }

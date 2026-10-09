@@ -60,7 +60,14 @@ export default class VideoSlide {
 	}
 
 	protectControls() {
-		const eventNames = ['pointerdown', 'mousedown', 'touchstart', 'click', 'dblclick', 'wheel'];
+		// Keep the whole control gesture away from PhotoSwipe, including scrubbing.
+		// Do not preventDefault: native video controls need their browser behaviour.
+		const eventNames = [
+			'pointerdown', 'pointermove', 'pointerup', 'pointercancel',
+			'mousedown', 'mousemove', 'mouseup',
+			'touchstart', 'touchmove', 'touchend', 'touchcancel',
+			'click', 'dblclick', 'wheel'
+		];
 
 		for (const name of eventNames) {
 			this.element.addEventListener(

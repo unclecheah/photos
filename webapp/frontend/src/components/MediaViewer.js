@@ -133,6 +133,13 @@ export default class MediaViewer {
 	bindVideoEvents(pswp) {
 		const videos = new Map();
 
+		// Let native video controls handle pointer movement without cancellation.
+		pswp.addFilter('preventPointerEvent', (prevent, originalEvent) => {
+			const target = originalEvent.target;
+			if (target instanceof Element && target.closest('.media-video')) return false;
+			return prevent;
+		});
+
 		pswp.on('contentLoad', event => {
 			const { content } = event;
 			if (content.type !== 'video') return;
